@@ -1,3 +1,9 @@
+=link_to "Sign up", new_user_registration_path
+=link_to "Log in", new_user_session_path
+- if current_user
+  =link_to "Logout", destroy_user_session_path, method: :delete
+
+
 %h1 All Articles
 %p 
   =Article.public_count 
@@ -15,4 +21,4 @@
 
 %div
   =link_to "New article", new_article_path
-  =link_to "Archived articles", showarchived_articles_path
+  =link_to "Archived articles", showarchived_articles_path(@articles)
