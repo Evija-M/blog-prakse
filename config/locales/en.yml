@@ -28,6 +28,15 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  hello: "Hello"
+  sign_up: "Sign up"
+  log_in: "Log in"
+  log_out: "Log out"
+  all_articles: "All Articles"
+  public_articles: "Public articles"
+  private_articles: "Private articles"
+  archived_articles: "Archived articles"
+  new_article: "New article"
+  edit: "Edit"
+  delete: "Delete"

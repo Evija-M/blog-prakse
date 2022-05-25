@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-
+  #around_action :change_lang
   #http_basic_authenticate_with name: "evija", password: "12345", except: :index
   def index
     @articles = Article.all
@@ -43,6 +43,11 @@ class ArticlesController < ApplicationController
     @article = Article.find_by(status: 'archived')
   end
 
+  #def change_lang
+  #  locale = params[:locale] || I18n.default_locale
+  #  I18n.locale = locale
+  #  redirect_to root_path
+  #end
   private
     def article_params
       params.require(:article).permit(:title, :body, :status)
