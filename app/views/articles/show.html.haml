@@ -2,10 +2,10 @@
 %h2.m-2.p-1= @article.body
 %ul.list-group.w-25.m-4.p-3
   %li.list-group-item= link_to t("edit"), edit_article_path(@article)
-  %li.list-group-item= link_to t("delete"), article_path(@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %li.list-group-item= link_to t("delete"), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t("confirm?")}
   %li.list-group-item= link_to t("all_articles"), root_path
 
-%h2.m-2.p-1 Comments 
+%h2.m-2.p-1= t("comments") 
 =render @article.comments
-%h2.m-2.p-1 Add a comment
+%h2.m-2.p-1= t("add_comment")
 =render 'comments/form'
