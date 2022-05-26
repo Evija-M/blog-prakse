@@ -1,11 +1,11 @@
-%h1= @article.title
-%h2= @article.body
-%ul
-  %li= link_to t("edit"), edit_article_path(@article)
-  %li= link_to t("delete"), article_path(@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %li= link_to t("all_articles"), root_path
+%h1.m-2.p-1= @article.title
+%h2.m-2.p-1= @article.body
+%ul.list-group.w-25.m-4.p-3
+  %li.list-group-item= link_to t("edit"), edit_article_path(@article)
+  %li.list-group-item= link_to t("delete"), article_path(@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %li.list-group-item= link_to t("all_articles"), root_path
 
-%h2 Comments 
+%h2.m-2.p-1 Comments 
 =render @article.comments
-%h2 Add a comment
+%h2.m-2.p-1 Add a comment
 =render 'comments/form'

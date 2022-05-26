@@ -40,14 +40,8 @@ class ArticlesController < ApplicationController
   end
 
   def showarchived
-    @article = Article.find_by(status: 'archived')
+    @articles = Article.where(status: 'archived')
   end
-
-  #def change_lang
-  #  locale = params[:locale] || I18n.default_locale
-  #  I18n.locale = locale
-  #  redirect_to root_path
-  #end
   private
     def article_params
       params.require(:article).permit(:title, :body, :status)

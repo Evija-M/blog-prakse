@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   scope "(:locale)" do
     resources :articles do
       resources :comments
-      get "showarchived", on: :collection
+      get "showarchived", to: "articles#showarchived", on: :collection
     end
+    
   end
   # Defines the root path route ("/")
   root "articles#index"
