@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  #around_action :change_lang
-  #http_basic_authenticate_with name: "evija", password: "12345", except: :index
+  # around_action :change_lang
+  # http_basic_authenticate_with name: "evija", password: "12345", except: :index
   def index
     @articles = Article.all
   end
@@ -21,9 +23,11 @@ class ArticlesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
   def edit
-      @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
   end
+
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
@@ -34,16 +38,18 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-      @article = Article.find(params[:id])
-      @article.destroy
-      redirect_to root_path, status: :see_other
+    @article = Article.find(params[:id])
+    @article.destroy
+    redirect_to root_path, status: :see_other
   end
 
   def showarchived
     @articles = Article.where(status: 'archived')
   end
+
   private
-    def article_params
-      params.require(:article).permit(:title, :body, :status)
-    end
+
+  def article_params
+    params.require(:article).permit(:title, :body, :status)
+  end
 end
