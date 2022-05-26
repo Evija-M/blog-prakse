@@ -1,0 +1,12 @@
+lv:
+  hello: "Sveiki"
+  sign_up: "Reģistrēties"
+  log_in: "Pierakstīties"
+  log_out: "Izrakstīties"
+  all_articles: "Visi raksti"
+  public_articles: "Publiskie raksti"
+  private_articles: "Privātie raksti"
+  archived_articles: "Arhivētie raksti"
+  new_article: "Jauns raksts"
+  edit: "Rediģēt"
+  delete: "Dzēst"

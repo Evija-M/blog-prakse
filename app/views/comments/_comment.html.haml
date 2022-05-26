@@ -1,9 +1,9 @@
-%p 
+%p.m-2.p-2 
 -unless comment.archived?
-    %b Commenter:
+    %b.m-2.p-1 Commenter:
     =comment.commenter
     %br
-    %b Comment:
+    %b.m-2.p-1 Comment:
     =comment.body
 
-%p=link_to "Delete comment", [comment.article, comment], data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%button.btn.btn-outline-primary=link_to "Delete comment", [comment.article, comment], data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}

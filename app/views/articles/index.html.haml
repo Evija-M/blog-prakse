@@ -1,24 +1,21 @@
-=link_to "Sign up", new_user_registration_path
-=link_to "Log in", new_user_session_path
-- if current_user
-  =link_to "Logout", destroy_user_session_path, method: :delete
+.container
+  %h1
+    =t("all_articles")
+  %p 
+    =Article.public_count 
+    =t("public_articles")
+  %p
+    =Article.private_count 
+    =t("private_articles")
+  %p
+    =Article.archived_count 
+    =t("archived_articles")
+  %div="There are #{Article.count} articles"
+  %ul
+    - @articles.each do |article|
+      - unless article.archived? 
+        %li=link_to article.title, article
 
-
-%h1 All Articles
-%p 
-  =Article.public_count 
-  public articles
-%p
-  =Article.private_count 
-  private articles
-%p
-  =Article.archived_count 
-  archived articles
-%ul
-  - @articles.each do |article|
-    - unless article.archived? 
-      %li=link_to article.title, article
-
-%div
-  =link_to "New article", new_article_path
-  =link_to "Archived articles", showarchived_articles_path(@articles)
+%div.container
+  =link_to t("new_article"), new_article_path
+  =link_to t("archived_articles"), showarchived_articles_path

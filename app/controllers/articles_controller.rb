@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-
+  #around_action :change_lang
   #http_basic_authenticate_with name: "evija", password: "12345", except: :index
   def index
     @articles = Article.all
@@ -40,9 +40,8 @@ class ArticlesController < ApplicationController
   end
 
   def showarchived
-    @article = Article.find_by(status: 'archived')
+    @articles = Article.where(status: 'archived')
   end
-
   private
     def article_params
       params.require(:article).permit(:title, :body, :status)

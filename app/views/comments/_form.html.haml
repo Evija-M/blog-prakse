@@ -1,15 +1,16 @@
-=form_with model: [@article, @article.comments.build] do |form|
-  %p
-    =form.label :commenter
-    %br
-    =form.text_field :commenter
-  %p
-    =form.label :body
-    %br
-    =form.text_area :body
-  %p
-    =form.label :status
-    %br
-    =form.select :status,  ['public', 'private', 'archived'], selected: 'public'
-  %p
-    =form.submit
+%div.m-4.p-1
+  =form_with model: [@article, @article.comments.build] do |form|
+    %div.form-control.w-25
+      =form.label :commenter
+      %br
+      =form.text_field :commenter
+    %div.form-control.w-25
+      =form.label :body
+      %br
+      =form.text_area :body
+    %div.form-control.w-25
+      =form.label :status
+      %br
+      =form.select :status, ['public', 'private', 'archived'], selected: 'public'
+    %div
+      =form.submit
