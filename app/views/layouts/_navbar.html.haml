@@ -7,7 +7,7 @@
     #navbarCollapse.collapse.navbar-collapse.m-2
       %ul.navbar-nav.me-auto.mb-2.mb-md-0
         %li.nav-item.p-1
-          =link_to "Home", root_path
+          =link_to t("home"), root_path
         %li.nav-item.p-1
           =link_to t("sign_up"), new_user_registration_path
         - if !current_user
