@@ -10,7 +10,6 @@
   %p
     =Article.archived_count 
     =t("archived_articles")
-  %div="There are #{Article.count} articles"
   %ul
     - @articles.each do |article|
       - unless article.archived? 
