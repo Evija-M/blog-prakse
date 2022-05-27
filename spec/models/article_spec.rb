@@ -19,7 +19,6 @@ describe 'Article' do
     it 'body length must be at least 5' do
       article.body = "12345"
       expect(article).to be_valid
-      #expect(article.errors[:body].count).to eq(0)
     end
   end
 end
