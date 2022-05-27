@@ -1,9 +1,9 @@
+require 'faker'
+
 FactoryBot.define do
   factory :article do
-    title {"title"}
-    body {"ccccc"}
-    created_at{0}
-    updated_at{0}
+    title {Faker::Food.dish}
+    body {Faker::Food.description}
 
     trait :archived do
       status {"archived"}
