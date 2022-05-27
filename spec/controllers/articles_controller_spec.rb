@@ -1,5 +1,4 @@
 require 'rails_helper'
-#archived articles
 
 describe ArticlesController do
   context '#showarchived' do
