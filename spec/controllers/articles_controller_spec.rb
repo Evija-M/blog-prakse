@@ -11,6 +11,7 @@ describe ArticlesController do
     it 'list of archived articles' do
       get :showarchived
       expect(assigns(:articles)).to eq([article1, article3, article5])
+      expect(assigns(:articles)).not_to eq([article2, article4])
     end
   end
 end
