@@ -6,7 +6,7 @@ FactoryBot.define do
     body {Faker::Food.description}
 
     trait :archived do
-      status {ARCHIVED = 'archived'}
+      status {Article:ARCHIVED}
     end
     trait :other do
       sequence :status, %i[public private].cycle
