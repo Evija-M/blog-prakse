@@ -30,32 +30,57 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 en:
   hello: "Hello"
-  sign_up: "Sign up"
-  log_in: "Log in"
-  log_out: "Log out"
-  all_articles: "All Articles"
-  public_articles: "Public articles"
-  private_articles: "Private articles"
-  archived_articles: "Archived articles"
-  new_article: "New article"
-  edit: "Edit"
-  delete: "Delete"
-  home: "Home"
-  commenter: "Commenter"
-  comment: "Comment"
-  delete_comment: "Delete comment"
-  comments: "Comments"
-  add_comment: "Add a comment"
-  confirm?: "Are you sure"
-  status: "Status"
-  submit: "Submit"
-  edit_article: "Edit Article"
-  title: "Title"
-  body: "Text"
-  email: "E-mail"
-  password: "Password"
-  password_confirmation: "Password confirmation"
-  go_back: "Go back"
-  remember_me: "Remember me"
-  forgot_password?: "Forgot your password?"
-  
+  activerecord:
+    models:
+      user: "User"
+      article: "Article"
+      comment:
+        one: "Comment"
+        other: "Comments"
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Password"
+      article:
+        title: "Title"
+        body: "Text"
+        status: "Status"
+      comment:
+        body: "Text"
+        commenter: "Commenter"
+  articles:
+    all_articles: "All Articles"
+    public_articles: "Public articles"
+    private_articles: "Private articles"
+    archived_articles: "Archived articles"
+    new_article: "New article"
+    edit_article: "Edit Article"
+    show_articles: "My articles"
+    my_articles: "My articles"
+    export_articles: "Export articles"
+  users:
+    all_users: "All users"
+  comments:
+    delete_comment: "Delete comment"
+    comments: "Comments"
+    add_comment: "Add a comment"
+  account: 
+    sign_up: "Sign up"
+    log_in: "Log in"
+    log_out: "Log out"
+    remember_me: "Remember me"
+    forgot_password?: "Forgot your password?"
+    edit_profile: "Edit profile"
+    delete_acc: "Delete account"
+  lang:
+    english: "EN"
+    latvian: "LV"
+  actions:
+    edit: "Edit"
+    delete: "Delete"
+    submit: "Submit"
+    go_back: "Go back"
+    home: "Home"
+    update: "Update"
+  confirmation:
+    confirm?: "Are you sure?"

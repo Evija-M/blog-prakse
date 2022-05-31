@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Articles') do |sheet|
+  @articles.each do |article|
+    sheet.add_row [article.title, article.body]
+  end
+end

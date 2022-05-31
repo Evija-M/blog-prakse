@@ -1,18 +1,6 @@
-%div.m-4.p-1
-  =form_with model: [@article, @article.comments.build] do |form|
-    %div.form-control.w-25
-      =form.label t("commenter")
-      %br
-      =form.text_field :commenter
-    %div.form-control.w-25
-      =form.label t("comment")
-      %br
-      =form.text_area :body
-    %div.form-control.w-25
-      =form.label t("status")
-      %br
-      =form.select :status, ['public', 'private'], selected: 'public'
-    %div
-      =form.submit 
-      =t("submit")
-      
+%div.m-4.p-1.w-25
+  =simple_form_for [@article, @article.comments.build] do |f|
+    =f.input :commenter, autocomplete: current_user.email
+    =f.input :body
+    =f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
+    =f.submit t('actions.submit')

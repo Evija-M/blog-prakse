@@ -1,0 +1,6 @@
+%h1 Hello 
+=@user.email 
+
+%p You just created a new article 
+%p link: 
+=link_to @article.title, "http://localhost:3000/en/articles/#{@article.id}"

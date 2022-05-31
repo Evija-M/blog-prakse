@@ -1,0 +1,8 @@
+%h1= t('articles.my_articles')
+
+-@articles.each do |article|
+  %div.container
+    = link_to article.title, article
+    = article.status
+    %br
+    %br

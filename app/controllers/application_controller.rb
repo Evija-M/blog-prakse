@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  add_flash_types :info, :error, :warning
+  add_flash_types :danger, :info, :warning, :success, :messages
 
   around_action :switch_locale
 

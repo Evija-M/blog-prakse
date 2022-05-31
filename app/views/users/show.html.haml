@@ -1,0 +1,8 @@
+%div.container
+  %h3= @user.email
+  %ul.list-group.w-25
+    %li.list-group-item= link_to t('articles.show_articles'), articles_users_path
+    %li.list-group-item= link_to t('account.edit_profile'), edit_user_registration_path
+    %li.list-group-item= link_to t('account.delete_acc'), users_destroy_path, data: { confirmation: t('confirmation.confirm?') }
+  - if admin?
+    %a.btn{:href => users_path}= t('all_users')
