@@ -11,6 +11,7 @@ lv:
       user:
         email: "E-pasts"
         password: "Parole"
+        role: "Loma"
       article:
         title: "Virsraksts"
         body: "Teksts"
@@ -35,6 +36,7 @@ lv:
     add_comment: "Pievienot komentāru"
   users:
     all_users: "Visi lietotāji"
+    users_list: "Lietotāju saraksts"
   account:
     sign_up: "Reģistrēties"
     log_in: "Pierakstīties"
@@ -56,3 +58,6 @@ lv:
     update: "Atjaunot"
   confirmation:
     confirm?: "Vai esat pārliecināts?"
+  email:
+    created_new_article: "Jūs tikko izveidojāt jaunu rakstu"
+    link: "Saite"
