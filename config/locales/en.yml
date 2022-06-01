@@ -41,6 +41,7 @@ en:
       user:
         email: "E-mail"
         password: "Password"
+        role: "Role"
       article:
         title: "Title"
         body: "Text"
@@ -60,6 +61,7 @@ en:
     export_articles: "Export articles"
   users:
     all_users: "All users"
+    users_list: "Users list"
   comments:
     delete_comment: "Delete comment"
     comments: "Comments"
@@ -84,3 +86,6 @@ en:
     update: "Update"
   confirmation:
     confirm?: "Are you sure?"
+   email:
+    created_new_article: "You just created a new article"
+    link: "Link"
