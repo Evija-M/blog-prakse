@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def admin?
-    @user.role == 1
+    @user.role == 'admin'
   end
   helper_method :admin?
 end
