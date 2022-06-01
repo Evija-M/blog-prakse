@@ -1,9 +1,9 @@
-%h2 Users list
+%h2= t('users_list')
 %table.table
   %thead.thead-dark
     %tr
-      %th{:scope => "col"} Email
-      %th{:scope => "col"} Role
+      %th{:scope => "col"}= User.human_attribute_name('email')
+      %th{:scope => "col"}= User.human_attribute_name('role')
   %tbody
   - @users.each do |user|
     %tr
