@@ -5,3 +5,4 @@
     =f.input :status, collection: Visible::VALID_STATUSES, prompt: :translate
     =f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
     =f.button :submit, t('actions.submit'), class: "btn-primary"
+    
