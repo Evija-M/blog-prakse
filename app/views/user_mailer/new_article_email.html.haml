@@ -1,6 +1,6 @@
-%h1 Hello 
+%h1= t('hello') 
 =@user.email 
 
-%p You just created a new article 
-%p link: 
+%p= t('email.created_new_article')
+%p= t('email.link'): 
 =link_to @article.title, "http://localhost:3000/en/articles/#{@article.id}"
