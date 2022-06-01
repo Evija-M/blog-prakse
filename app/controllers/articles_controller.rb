@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  # around_action :change_lang
   def index
     @articles = Article.all
   end
