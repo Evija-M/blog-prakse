@@ -64,9 +64,21 @@ gem 'jquery-rails'
 
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
+
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+
+gem 'pry', '~> 0.13.1'
+
+gem 'simple_form'
+
+gem 'caxlsx'
+gem 'caxlsx_rails'
+gem 'rubyzip', '>= 1.2.1'
+
+gem 'resque'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end

@@ -1,11 +1,12 @@
 %h1.m-2.p-1= @article.title
 %h2.m-2.p-1= @article.body
 %ul.list-group.w-25.m-4.p-3
-  %li.list-group-item= link_to t("edit"), edit_article_path(@article)
-  %li.list-group-item= link_to t("delete"), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t("confirm?")}
-  %li.list-group-item= link_to t("all_articles"), root_path
-
-%h2.m-2.p-1= t("comments") 
-=render @article.comments
-%h2.m-2.p-1= t("add_comment")
-=render 'comments/form'
+  - if current_user && current_user.id == @article.user_id
+    %li.list-group-item= link_to t('actions.edit'), edit_article_path(@article)
+    %li.list-group-item= link_to t('actions.delete'), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
+  %li.list-group-item= link_to t('articles.all_articles'), root_path
+-if current_user
+  %h2.m-2.p-1= Comment.model_name.human
+  =render @article.comments
+  %h2.m-2.p-1= t('comments.add_comment')
+  =render 'comments/form'

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  # around_action :change_lang
-  # http_basic_authenticate_with name: "evija", password: "12345", except: :index
   def index
     @articles = Article.all
   end
@@ -18,6 +16,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
+      UserMailer.new_article_email(current_user, @article).deliver
       redirect_to @article
     else
       render :new, status: :unprocessable_entity
@@ -26,6 +25,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    redirect_to @article if current_user.id != @article.user_id
   end
 
   def update
@@ -39,17 +39,33 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy
-    redirect_to root_path, status: :see_other
+    if @article.user_id == current_user.id
+      @article.destroy
+      redirect_to root_path, status: :see_other
+    else
+      redirect_to root_path
+    end
   end
 
   def showarchived
     @articles = Article.where(status: 'archived')
   end
 
+  def show_user_rticles
+    @articles = Article.where(user_id: current_user.id)
+  end
+
+  def export
+    @articles = Article.all
+    respond_to do |format|
+      format.xlsx
+    end
+    render xlsx: 'export_articles', disposition: inline
+  end
+
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status)
+    params.require(:article).permit(:title, :body, :status, :user_id)
   end
 end

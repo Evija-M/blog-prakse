@@ -1,0 +1,11 @@
+%h2= t('users_list')
+%table.table
+  %thead.thead-dark
+    %tr
+      %th{:scope => "col"}= User.human_attribute_name('email')
+      %th{:scope => "col"}= User.human_attribute_name('role')
+  %tbody
+  - @users.each do |user|
+    %tr
+      %td=link_to user.email, user
+      %td=User::ROLES[user.role]
