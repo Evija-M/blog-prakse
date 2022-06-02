@@ -6,7 +6,7 @@
     = f.input :password
     - if @minimum_password_length
       %em=@minimum_password_length
-      %em= "characters minimum"
+      %em= t('characters')
     = f.input :password_confirmation, label: t('account.password_confirmation')
     =f.button :submit, t('account.sign_up'), class: "btn-primary"
   = render "devise/shared/links"
