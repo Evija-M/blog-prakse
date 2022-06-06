@@ -4,15 +4,21 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
-name: Ruby
-env:
-  PG_DATABASE: postgres
-  PG_HOST: localhost
-  PG_PORT: 5432
-  PG_USER: postgres
-  PG_PASSWORD: postgres
-  RAILS_ENV: test
 
+- name: Setup PostgreSQL
+  # You may pin to the exact commit or the version.
+  # uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
+  uses: Harmon758/postgresql-action@v1.0.0
+  with:
+    # Version of PostgreSQL to use
+    postgresql version: # optional, default is latest
+    # POSTGRES_DB - name for the default database that is created
+    postgresql db: # optional, default is 
+    # POSTGRES_USER - create the specified user with superuser power
+    postgresql user: # optional, default is 
+    # POSTGRES_PASSWORD - superuser password
+    postgresql password: # optional, default is 
+name: Ruby
 on:
   push:
     branches: [ "main" ]
