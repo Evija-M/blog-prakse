@@ -1,0 +1,11 @@
+%h1 Deleted comments
+%ul.list-group.w-25
+  -@deleted_comments.each do |comment|
+    %li.list-group-item.m-1
+      = comment.commenter
+      = comment.body
+    %li.list-group-item.m-1
+      =link_to t('comments.restore_comment'), comment_restore_path(comment)
+    %li.list-group-item.m-1
+      =link_to t('comments.delete_comment'), delete_comment_path(comment)
+    %br

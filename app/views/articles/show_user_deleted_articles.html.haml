@@ -1,0 +1,7 @@
+%h1= t('articles.my_articles')
+%ul.list-group.w-25
+  -@deleted_articles.each do |article|
+    %li.list-group-item.m-1
+      = article.title
+    %li.list-group-item= link_to t('articles.restore_article'), article_restore_path(article)
+    %li.list-group-item= link_to t('actions.delete'), article_delete_path(article)

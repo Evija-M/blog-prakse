@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
+  acts_as_paranoid
+
   include Visible
   has_many :comments, dependent: :destroy
   belongs_to :user

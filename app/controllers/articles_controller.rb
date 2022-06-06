@@ -3,14 +3,16 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
+    ArchiveArticlesJob.perform_now(@articles)
   end
 
   def show
-    @article  = Article.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def new
     @article = Article.new
+    authorize @article
   end
 
   def create
@@ -25,7 +27,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    redirect_to @article if current_user.id != @article.user_id
+    authorize @article, :edit?
   end
 
   def update
@@ -39,7 +41,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    if @article.user_id == current_user.id
+    if authorize @article, :edit?
       @article.destroy
       redirect_to root_path, status: :see_other
     else
@@ -51,8 +53,28 @@ class ArticlesController < ApplicationController
     @articles = Article.where(status: 'archived')
   end
 
-  def show_user_rticles
-    @articles = Article.where(user_id: current_user.id)
+  def show_user_articles
+    authorize current_user, :show?
+    @articles = policy_scope(Article)
+  end
+
+  def show_user_deleted_articles
+    authorize current_user, :show?
+    @deleted_articles = Article.only_deleted.where('user_id = ?', current_user.id)
+  end
+
+  def restore_article
+    @article = Article.only_deleted.find(params[:article_id])
+    authorize @article, :edit?
+    @article.recover(recursive: true)
+    redirect_to @article
+  end
+
+  def delete_article
+    @article = Article.only_deleted.find(params[:article_id])
+    authorize @article, :edit?
+    @article.destroy_fully!
+    redirect_to deleted_articles_users_path
   end
 
   def export

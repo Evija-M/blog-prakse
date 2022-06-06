@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  acts_as_paranoid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,4 +10,8 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
 
   ROLES = %w[registred admin].freeze
+
+  def admin?
+    role == 'admin'
+  end
 end

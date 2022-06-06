@@ -59,6 +59,8 @@ en:
     show_articles: "My articles"
     my_articles: "My articles"
     export_articles: "Export articles"
+    restore_article: "Restore article"
+    deleted_articles: "Deleted articles"
   users:
     all_users: "All users"
     users_list: "Users list"
@@ -66,6 +68,8 @@ en:
     delete_comment: "Delete comment"
     comments: "Comments"
     add_comment: "Add a comment"
+    restore_comment: "Restore comment"
+    deleted_comments: "Deleted comments"
   account: 
     sign_up: "Sign up"
     log_in: "Log in"
@@ -84,8 +88,10 @@ en:
     go_back: "Go back"
     home: "Home"
     update: "Update"
+    restore: "Restore"
   confirmation:
     confirm?: "Are you sure?"
-   email:
+  email:
     created_new_article: "You just created a new article"
     link: "Link"
+  characters: "characters minimum"
