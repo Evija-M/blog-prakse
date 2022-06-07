@@ -34,6 +34,7 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Start PostgreSQL on MacOS
       run: |
+        brew install postgresql
         brew services start postgresql
     - name: Create user
       run: |
