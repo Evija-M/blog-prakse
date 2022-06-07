@@ -35,7 +35,6 @@ jobs:
     - name: Start PostgreSQL on MacOS
       run: |
         brew services start postgresql
-      # Homebrew creates an account with the same name as the installing user, but no password
     - name: Create user
       run: |
           psql --command="CREATE USER postgres PASSWORD 'postgres'" --command="\du" postgres
