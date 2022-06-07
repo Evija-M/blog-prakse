@@ -39,7 +39,7 @@ jobs:
         psql postgres
     - name: Create test database
       run: |
-        CREATE DATABASE blog_test;
+        createdb blog_test
 
     - name: Run tests
       run: bundle exec rake
