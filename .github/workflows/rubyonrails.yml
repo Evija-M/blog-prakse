@@ -4,13 +4,6 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
-name: Setup PostgreSQL
-  uses: postgresql-action@v1.0.0
-  with:
-    postgresql version: "14.3"
-    postgresql db: blog_development 
-    postgresql user: postgres
-    postgresql password: postgres
 name: Ruby
 on:
   push:
@@ -30,6 +23,13 @@ jobs:
         ruby-version: ['3.1']
 
     steps:
+    - name: Setup PostgreSQL
+      uses: postgresql-action@v1.0.0  
+      with:
+        postgresql version: "14.3"
+        postgresql db: blog_development 
+        postgresql user: postgres
+        postgresql password: postgres
     - uses: actions/checkout@v3
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
