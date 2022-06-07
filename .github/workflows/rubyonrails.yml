@@ -11,13 +11,13 @@
   uses: Harmon758/postgresql-action@v1.0.0
   with:
     # Version of PostgreSQL to use
-    postgresql version: # optional, default is latest
+    postgresql version: 14.3
     # POSTGRES_DB - name for the default database that is created
-    postgresql db: # optional, default is 
+    postgresql db: blog_development 
     # POSTGRES_USER - create the specified user with superuser power
-    postgresql user: # optional, default is 
+    postgresql user: postgres
     # POSTGRES_PASSWORD - superuser password
-    postgresql password: # optional, default is 
+    postgresql password: postgres
 name: Ruby
 on:
   push:
