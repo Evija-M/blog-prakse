@@ -2,9 +2,10 @@
 
 class CommentsController < ApplicationController
   def create
-    authorize current_user, :signed_in?
     @article = Article.find(params[:article_id])
+    authorize @article
     @comment = @article.comments.create(comment_params)
+    authorize @comment
     redirect_to article_path(@article)
   end
 
@@ -21,24 +22,24 @@ class CommentsController < ApplicationController
     @deleted_comments = Comment.only_deleted.where('user_id = ?', current_user.id)
   end
 
-  def restore_comment
+  def restore
     @comment = Comment.only_deleted.find(params[:comment_id])
-    authorize @comment, :destroy?
+    authorize @comment, :restore?
     @article = Article.with_deleted.find(@comment.article_id)
     if @article.deleted_at.nil?
       @comment.recover
       redirect_to @article
     else
-      flash[:error] = 'You cant restore this comment because article is still deleted'
+      flash[:error]= t('errors.unable_to_restore')
       redirect_to deleted_articles_users_path
     end
   end
 
-  def delete_comment
+  def delete
     @comment = Comment.only_deleted.find(params[:comment_id])
     authorize @comment, :destroy?
     @comment.destroy_fully!
-    redirect_to deleted_comments_users_path
+    redirect_to deleted_comments_users_path(current_user.id)
   end
 
   private
