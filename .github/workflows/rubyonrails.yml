@@ -32,17 +32,16 @@ jobs:
       with:
         ruby-version: '3.1'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Setup PostgreSQL
-      uses: Harmon758/postgresql-action@0be19fa37850b22cb4c9bbf28a03abbf44abd863
-      # uses: Harmon758/postgresql-action@v1.0.0
-      with:
-        # Version of PostgreSQL to use
-        postgresql version: "14.3"
-        # POSTGRES_DB - name for the default database that is created
-        postgresql db: blog_test
-        # POSTGRES_USER - create the specified user with superuser power
-        postgresql user: postgres
-        # POSTGRES_PASSWORD - superuser password
-        postgresql password: postgres
+    - name: Start PostgreSQL on MacOS
+      run: |
+        brew services start postgresql
+      # Homebrew creates an account with the same name as the installing user, but no password
+    - name: Create scheduler user
+      run: |
+          psql --command="CREATE USER postgres PASSWORD 'postgres'" --command="\du" postgres
+    - name: Create timetable database
+      run: |
+          createdb --owner=postgres blog_test
+          PGPASSWORD=postgres psql --username=postgres --host=localhost
     - name: Run tests
       run: bundle exec rake
