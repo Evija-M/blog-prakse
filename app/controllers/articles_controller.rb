@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
 
   def delete
     @article = Article.only_deleted.find(params[:article_id])
-    authorize @article, :edit?
+    authorize @article, :delete?
     @article.destroy_fully!
     redirect_to deleted_articles_users_path
   end
