@@ -35,6 +35,8 @@ jobs:
     - name: Start PostgreSQL on MacOS
       run: |
         brew services start postgresql
+        rm /usr/local/var/postgres/postmaster.pid
+        brew services restart postgresql
     # Homebrew creates an account with the same name as the installing user, but no password
     - name: Create user
       run: |
