@@ -1,4 +1,4 @@
-%h1 Deleted comments
+%h1= t('comments.deleted_comments')
 %ul.list-group.w-25
   -@deleted_comments.each do |comment|
     %li.list-group-item.m-1
@@ -9,3 +9,4 @@
     %li.list-group-item.m-1
       =link_to t('comments.delete_comment'), delete_comment_path(comment)
     %br
+    
