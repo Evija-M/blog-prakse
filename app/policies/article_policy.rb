@@ -31,4 +31,32 @@ class ArticlePolicy < ApplicationPolicy
   def new?
     user
   end
+  
+  def delete?
+    if user
+      @article.user_id == user.id
+    else
+      false
+    end
+  end
+
+  def create?
+    user
+  end
+
+  def destroy?
+    if user
+      @article.user_id == user.id
+    else
+      false
+    end
+  end
+  
+  def show?
+    if article.status == 'private'
+      user.id == article.user_id
+    else
+      true
+    end
+  end
 end
