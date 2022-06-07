@@ -36,10 +36,10 @@ jobs:
       run: |
         brew services start postgresql
       # Homebrew creates an account with the same name as the installing user, but no password
-    - name: Create scheduler user
+    - name: Create user
       run: |
           psql --command="CREATE USER postgres PASSWORD 'postgres'" --command="\du" postgres
-    - name: Create timetable database
+    - name: Create database
       run: |
           createdb --owner=postgres blog_test
           PGPASSWORD=postgres psql --username=postgres --host=localhost
