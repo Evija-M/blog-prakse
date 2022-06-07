@@ -65,7 +65,7 @@ class ArticlesController < ApplicationController
 
   def restore_article
     @article = Article.only_deleted.find(params[:article_id])
-    authorize @article, :delete?
+    authorize @article, :edit?
     @article.recover(recursive: true)
     redirect_to @article
   end
