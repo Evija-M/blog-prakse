@@ -7,7 +7,6 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  # ??????
   def show?
     user.id = @user.id
   end
