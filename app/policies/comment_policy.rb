@@ -8,6 +8,18 @@ class CommentPolicy < ApplicationPolicy
     @user = user
     @comment = comment
   end
+  
+  def create?
+    user
+  end
+
+  def restore?
+    if user
+      comment.user_id == user.id
+    else 
+      false
+    end
+  end
 
   def destroy?
     if user
