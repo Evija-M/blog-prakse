@@ -3,11 +3,11 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
-    ArchiveArticlesJob.perform_now(@articles)
   end
 
   def show
     @article = Article.find(params[:id])
+    authorize @article
   end
 
   def new
@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    if authorize @article, :edit?
+    if authorize @article, :destroy?
       @article.destroy
       redirect_to root_path, status: :see_other
     else
@@ -65,12 +65,12 @@ class ArticlesController < ApplicationController
 
   def restore_article
     @article = Article.only_deleted.find(params[:article_id])
-    authorize @article, :edit?
+    authorize @article, :delete?
     @article.recover(recursive: true)
     redirect_to @article
   end
 
-  def delete_article
+  def delete
     @article = Article.only_deleted.find(params[:article_id])
     authorize @article, :edit?
     @article.destroy_fully!
