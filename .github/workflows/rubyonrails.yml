@@ -16,12 +16,18 @@ permissions:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['3.1']
-
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+          POSTGRES_PASSWORD: ""
+          ports: 5432
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,14 +36,13 @@ jobs:
         with:
           ruby-version: '3.1'
           bundler-cache: true
-      - name: Start PostgreSQL
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: test
         run: |
-          brew services start postgresql
-          brew services restart postgresql
-          psql postgres
-      - name: Create test database
-        run: |
-          createdb blog_test
+          bin/rails db:setup
 
       - name: Run tests
         run: bundle exec rake
