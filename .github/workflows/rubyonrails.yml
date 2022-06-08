@@ -27,7 +27,6 @@ jobs:
           POSTGRES_USER: test
           POSTGRES_DB: test
           POSTGRES_HOST: localhost
-          POSTGRES_PASSWORD: "test"
         ports: ["5432:5432"]
     steps:
       - name: Checkout code
@@ -41,9 +40,8 @@ jobs:
         env:
           RAILS_ENV: test
           PGUSER: test
-          PGPASSWORD: "test"
           PGHOST: localhost
         run: |
           bin/rails db:setup
       - name: Run tests
-        run: bundle exec rake
+        run: bundle exec rspec
