@@ -45,6 +45,6 @@ jobs:
           PGPASSWORD: "test"
         run: |
           bin/rails db:setup
-
+          brew services restart postgresql
       - name: Run tests
         run: bundle exec rspec
