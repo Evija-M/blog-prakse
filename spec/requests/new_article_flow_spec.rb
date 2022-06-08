@@ -13,7 +13,7 @@ RSpec.describe 'New article', type: :request do
       click_button 'Log in'
 
       visit new_article_path
-      expect(response).to have_http_status(200)
+      expect(page).to have_http_status(200)
     end
   end
 end
