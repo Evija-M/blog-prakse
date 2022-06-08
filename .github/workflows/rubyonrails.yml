@@ -26,6 +26,7 @@ jobs:
         env:
           POSTGRES_USER: test
           POSTGRES_DB: blog_test
+          POSTGRES_HOST: localhost
           POSTGRES_PASSWORD: "test"
         ports: 
          - 5432:5432
