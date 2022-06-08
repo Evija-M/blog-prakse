@@ -56,6 +56,6 @@ en:
     update: "Update"
   confirmation:
     confirm?: "Are you sure?"
-   email:
+  email:
     created_new_article: "You just created a new article"
     link: "Link"
