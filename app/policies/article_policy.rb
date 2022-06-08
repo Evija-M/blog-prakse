@@ -27,7 +27,7 @@ class ArticlePolicy < ApplicationPolicy
   def new?
     user
   end
-  
+
   def delete?
     if user
       @article.user_id == user.id
@@ -47,7 +47,7 @@ class ArticlePolicy < ApplicationPolicy
       false
     end
   end
-  
+
   def show?
     if article.status == 'private'
       user.id == article.user_id

@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.xlsx
     end
-    render xlsx: 'export_articles', disposition: inline
+    render xlsx: 'export_articles', disposition: :inline
   end
 
   private
