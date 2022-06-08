@@ -21,11 +21,16 @@ class CommentPolicy < ApplicationPolicy
     end
   end
 
-  def destroy?
-    if user
-      comment.user_id == user.id
-    else
-      false
-    end
+  def create?
+    user
   end
+
+  def destroy?
+    user ? comment.user_id == user.id : false
+  end
+
+  def restore?
+    user ? comment.user_id == user.id : false
+  end
+  
 end

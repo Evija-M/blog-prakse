@@ -21,11 +21,7 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def edit?
-    if user
-      @article.user_id == user.id
-    else
-      false
-    end
+    user ? @article.user_id == user.id : false
   end
 
   def new?

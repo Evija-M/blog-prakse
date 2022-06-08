@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
       @comment.recover
       redirect_to @article
     else
-      flash[:error]= t('errors.unable_to_restore')
+      flash[:error] = t('errors.unable_to_restore')
       redirect_to deleted_articles_users_path
     end
   end

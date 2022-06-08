@@ -6,7 +6,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = authorize Article.find(params[:id])
+    @article = Article.find(params[:id])
+    authorize @article
   end
 
   def new

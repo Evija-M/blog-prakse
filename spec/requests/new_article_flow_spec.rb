@@ -12,8 +12,8 @@ RSpec.describe 'New article', type: :request do
       fill_in 'Password', with: user.password
       click_button 'Log in'
 
-      get new_article_path
-      expect(response).to have_http_status(200)
+      visit new_article_path
+      expect(page).to have_http_status(200)
     end
   end
 end
