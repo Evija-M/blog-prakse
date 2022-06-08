@@ -23,7 +23,6 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_USER: postgres
-          POSTGRES_DB: test
           POSTGRES_HOST: localhost
           POSTGRES_PASSWORD: postgres
         ports: 
@@ -36,6 +35,8 @@ jobs:
         with:
           ruby-version: '3.1'
           bundler-cache: true
+      - name: Install dependent libraries
+        run: sudo apt-get install libpq-dev
       - name: Setup test database
         env:
           RAILS_ENV: test
