@@ -35,8 +35,6 @@ jobs:
         with:
           ruby-version: '3.1'
           bundler-cache: true
-      - name: Install dependent libraries
-        run: sudo apt-get install libpq-dev
       - name: Setup test database
         env:
           RAILS_ENV: test
@@ -46,8 +44,6 @@ jobs:
           PGPORT: 5432
         run: |
           bin/rails db:setup
-      - name: Install dependencies
-        run: bundle install
       - name: Run tests
         env:
           RAILS_ENV: test
