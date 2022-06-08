@@ -49,4 +49,6 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Run tests
+        env:
+          POSTGRES_PASSWORD: postgres
         run: bundle exec rspec
