@@ -46,4 +46,4 @@ jobs:
         run: |
           bin/rails db:setup
       - name: Run tests
-        run: bundle exec rspec
+        run: bundle exec rake
