@@ -25,8 +25,8 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_USER: test
-          POSTGRES_DB: blog_test
-          POSTGRES_HOST: postgres
+          POSTGRES_DB: test
+          POSTGRES_HOST: localhost
           POSTGRES_PASSWORD: "test"
         ports: ["5432:5432"]
     steps:
@@ -42,7 +42,6 @@ jobs:
           RAILS_ENV: test
           PGUSER: test
           PGPASSWORD: "test"
-          PGHOST: postgres
         run: |
           bin/rails db:setup
       - name: Run tests
