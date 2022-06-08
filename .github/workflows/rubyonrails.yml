@@ -28,8 +28,7 @@ jobs:
           POSTGRES_DB: blog_test
           POSTGRES_HOST: localhost
           POSTGRES_PASSWORD: "test"
-        ports: 
-         - 5432:5432
+        ports: ["5432:5432"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -41,10 +40,9 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          PGHOST: localhost
           PGUSER: test
           PGPASSWORD: "test"
-          PG_PORT: 5432
+          PGHOST: localhost
         run: |
           bin/rails db:setup
       - name: Run tests
