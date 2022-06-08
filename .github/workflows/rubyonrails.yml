@@ -5,7 +5,6 @@
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
 name: Ruby
-
 on:
   push:
     branches: [ "main" ]
@@ -17,21 +16,37 @@ permissions:
 
 jobs:
   test:
-
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        ruby-version: ['3.1']
-
+    runs-on: ubuntu-latest
+  
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: postgres
+        ports: 
+         - 5432:5432
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
-      uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
-      with:
-        ruby-version: '3.1'
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
-      run: bundle exec rake
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGUSER: postgres
+          PGHOST: localhost
+          PGPASSWORD: postgres
+          PGPORT: 5432
+        run: |
+          bin/rails db:setup
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        run: bundle exec rspec
