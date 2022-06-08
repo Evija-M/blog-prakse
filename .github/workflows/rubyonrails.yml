@@ -41,7 +41,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          PGUSER: test
+          PGUSER: postgres
           PGHOST: localhost
           PGPASSWORD: postgres
         run: |
