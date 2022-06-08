@@ -17,9 +17,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['3.1']
+  
     services:
       postgres:
         image: postgres:11
@@ -32,7 +30,7 @@ jobs:
          - 5432:5432
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -44,7 +42,10 @@ jobs:
           PGUSER: postgres
           PGHOST: localhost
           PGPASSWORD: postgres
+          PGPORT: 5432
         run: |
           bin/rails db:setup
+      - name: Install dependencies
+        run: bundle install
       - name: Run tests
         run: bundle exec rspec
