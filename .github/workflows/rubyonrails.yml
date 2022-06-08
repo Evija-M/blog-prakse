@@ -47,6 +47,6 @@ jobs:
           bin/rails db:setup
       - name: Run tests
         run: |
-          rm /usr/local/var/postgres/postmaster.pid
+          rm postmaster.pid
           brew services restart postgresql
           bundle exec rspec
