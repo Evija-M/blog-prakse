@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+Devise::Mailer.perform_deliveries = false
 
 RSpec.describe 'New article', type: :request do
   context 'GET /new_article' do
