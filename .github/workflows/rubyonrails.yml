@@ -24,14 +24,15 @@ jobs:
       postgres:
         image: postgres:11
         env:
-          POSTGRES_USER: test
+          POSTGRES_USER: postgres
           POSTGRES_DB: test
           POSTGRES_HOST: localhost
           POSTGRES_PASSWORD: postgres
-        ports: ["5432:5432"]
+        ports: 
+         - 5432:5432
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
