@@ -50,6 +50,3 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: bundle exec rspec
-        
-      - name: Rubocop
-        run: rubocop
