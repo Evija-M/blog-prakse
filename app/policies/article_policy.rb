@@ -10,7 +10,11 @@ class ArticlePolicy < ApplicationPolicy
     end
 
     def resolve
-      @scope.where(user_id: @user.id)
+      if @user
+        @scope.where(status: 'public').or(@scope.where(user_id: @user.id, status: 'private'))
+      else
+        @scope.where(status: 'public')
+      end
     end
   end
 
@@ -21,19 +25,11 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def edit?
-    user ? @article.user_id == user.id : false
+    user && @article.deleted_at.nil? ? @article.user_id == user.id : false
   end
 
   def new?
     user
-  end
-
-  def delete?
-    if user
-      @article.user_id == user.id
-    else
-      false
-    end
   end
 
   def create?
@@ -41,18 +37,18 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def destroy?
-    if user
-      @article.user_id == user.id
-    else
-      false
-    end
+    @article.user == user
   end
 
   def show?
-    if article.status == 'private'
-      user.id == article.user_id
-    else
-      true
-    end
+    @article.status == 'private' ? user == @article.user : true
+  end
+
+  def restore?
+    @article.user == user
+  end
+
+  def show_user_articles?
+    user
   end
 end

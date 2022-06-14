@@ -1,13 +1,16 @@
-%h1.m-2.p-1= @article.title
-%h2.m-2.p-1= @article.body
-%ul.list-group.w-25.m-4.p-3
+.container
+  .display-3.p-1= @article.title
+  %hr.w-75
+  .w-75
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore ipsam libero, necessitatibus quae fugit animi modi itaque magni doloribus at veritatis repellendus optio voluptates alias error distinctio praesentium. Similique, quis.
   - if policy(@article).edit?
-    %li.list-group-item= link_to t('actions.edit'), edit_article_path(@article)
-    %li.list-group-item= link_to t('actions.delete'), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
-  %li.list-group-item= link_to t('articles.all_articles'), root_path
-
-%h2.m-2.p-1= Comment.model_name.human
-=render @article.comments
--if current_user
-  %h2.m-2.p-1= t('comments.add_comment')
-  =render 'comments/form'
+    .btn.btn-primary.m-1= link_to t('actions.edit'), edit_article_path(@article)
+    .btn.btn-danger.m-1= link_to t('actions.delete'), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
+  %hr.w-75
+.container
+  .display-6.m-2.p-1= Comment.model_name.human
+  =render @article.comments
+  %hr.w-75
+  -if current_user
+    .h4.m-2.p-1= t('comments.add_comment')
+    =render 'comments/form'

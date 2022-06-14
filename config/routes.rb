@@ -20,7 +20,6 @@ Rails.application.routes.draw do
       get 'showarchived', to: 'articles#showarchived', on: :collection
       get 'export', to: 'articles#export', on: :collection
       get 'restore', to: 'articles#restore_article'
-      get 'delete', to: 'articles#delete'
     end
     resources :users do
       get 'deleted_comments/:user_id', to: 'comments#show_user_deleted_comments', on: :collection, as: 'deleted_comments'
@@ -30,7 +29,6 @@ Rails.application.routes.draw do
     end
     get 'users/restore/:user_id', to: 'users#restore_user', as: 'users_restore'
     get 'users/restore_comment/:comment_id', to: 'comments#restore', as: 'comment_restore'
-    get 'users/delete_comment/:comment_id', to: 'comments#delete', as: 'delete_comment'
   end
   # Defines the root path route ("/")
   root 'articles#index'

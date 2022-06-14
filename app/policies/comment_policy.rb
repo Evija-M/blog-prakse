@@ -14,14 +14,15 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def restore?
-    if user
-      comment.user_id == user.id
-    else
-      false
-    end
+    @article = Article.with_deleted.where(id: comment.article_id).first
+    @comment.user == @user && @article.deleted_at.nil?
   end
 
   def destroy?
-    user ? comment.user_id == user.id : false
+    comment.user == user
+  end
+
+  def show?
+    user
   end
 end

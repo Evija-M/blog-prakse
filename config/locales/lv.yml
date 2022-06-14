@@ -67,5 +67,7 @@ lv:
     created_new_article: "Jūs tikko izveidojāt jaunu rakstu"
     link: "Saite"
   characters: "simboli minimums"
-  errors:
-    unable_to_restore: "Jūs nevarat atjaunot šo komentāru, jo raksts ir izdzēsts"
+  pundit:
+    default: 'Jūs nevarat veikt šo darbību'
+    comment_policy:
+     restore?: 'Jūs nevarat atjaunot šo komentāru'

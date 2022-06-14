@@ -95,5 +95,7 @@ en:
     created_new_article: "You just created a new article"
     link: "Link"
   characters: "characters minimum"
-  errors:
-    unable_to_restore: "You can't restore this comment because article is still deleted"
+  pundit:
+   default: 'You cannot perform this action.'
+   comment_policy:
+     restore?: 'You cannot restore this comment!'

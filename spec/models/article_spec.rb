@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Article' do
   context 'validations' do
-    let!(:article) { create :article, :other }
+    let!(:article) { create :article }
 
     it 'title must be persisted ' do
       article.title = nil

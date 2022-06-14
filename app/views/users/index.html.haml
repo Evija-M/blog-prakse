@@ -9,5 +9,5 @@
     %tr
       %td= user.email
       %td= user.role
-      - if user.deleted_at != nil
+      - if user.deleted?
         %td= link_to t('actions.restore'), users_restore_path(user.id)

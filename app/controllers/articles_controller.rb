@@ -2,11 +2,11 @@
 
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = policy_scope(Article)
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.with_deleted.find(params[:id])
     authorize @article
   end
 
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article = Article.with_deleted.find(params[:id])
     authorize @article, :edit?
   end
 
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    @article = Article.with_deleted.find(params[:id])
     if authorize @article, :destroy?
       @article.destroy
       redirect_to root_path, status: :see_other
@@ -54,31 +54,24 @@ class ArticlesController < ApplicationController
   end
 
   def show_user_articles
-    authorize current_user, :show?
-    @articles = policy_scope(Article)
+    authorize current_user, :show_user_articles?, policy_class: ArticlePolicy
+    @articles = current_user.articles
   end
 
   def show_user_deleted_articles
-    authorize current_user, :show?
-    @deleted_articles = Article.only_deleted.where('user_id = ?', current_user.id)
+    authorize current_user, :show_user_articles?, policy_class: ArticlePolicy
+    @deleted_articles = current_user.articles.only_deleted
   end
 
   def restore_article
     @article = Article.only_deleted.find(params[:article_id])
-    authorize @article, :edit?
+    authorize @article, :restore?
     @article.recover(recursive: true)
     redirect_to @article
   end
 
-  def delete
-    @article = Article.only_deleted.find(params[:article_id])
-    authorize @article, :delete?
-    @article.destroy_fully!
-    redirect_to deleted_articles_users_path
-  end
-
   def export
-    @articles = Article.all
+    @articles = policy_scope(Article)
     respond_to do |format|
       format.xlsx
     end
