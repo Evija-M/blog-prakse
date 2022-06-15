@@ -78,6 +78,7 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'acts_as_paranoid'
 gem 'resque'
 gem 'whenever', require: false
+gem 'whenever-test'
 
 gem 'letter_opener', group: :development
 group :development, :test do
