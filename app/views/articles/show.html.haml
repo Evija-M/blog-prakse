@@ -2,7 +2,7 @@
   .display-3.p-1= @article.title
   %hr.w-75
   .w-75
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore ipsam libero, necessitatibus quae fugit animi modi itaque magni doloribus at veritatis repellendus optio voluptates alias error distinctio praesentium. Similique, quis.
+  = @article.body
   - if policy(@article).edit?
     .btn.btn-primary.m-1= link_to t('actions.edit'), edit_article_path(@article)
     .btn.btn-danger.m-1= link_to t('actions.delete'), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
