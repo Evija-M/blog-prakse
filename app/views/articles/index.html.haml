@@ -9,5 +9,5 @@
       - @articles.each do |article|
         .col.p-4.border
           %a= link_to article.title, article
-          %p Author #{article.user.email}
-  
+          %p= article.user.email
+          
