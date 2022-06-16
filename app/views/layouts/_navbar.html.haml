@@ -1,24 +1,30 @@
 %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
   .container-fluid.text-white
-    %button.navbar-toggler{"aria-controls" => "navbarCollapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarCollapse", "data-bs-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse.m-2
       %ul.navbar-nav.me-auto.mb-2.mb-md-0
-        %li.nav-item.p-1
+        %li.nav-item
           =link_to t('actions.home'), root_path
-        %li.nav-item.p-1
-          =link_to t('account.sign_up'), new_user_registration_path
+        %li.nav-item
+          =link_to t('articles.all_articles'), root_path
+        %li.nav-item
+          =link_to t('articles.archived_articles'), showarchived_articles_path
+        %li.nav-item
+          =link_to t('articles.export_articles'), export_articles_path(format: "xlsx")
+      %ul.navbar-nav.mb-2.mb-md-0
         - if !current_user
-          %li.nav-item.p-1
+          %li.nav-item
+            =link_to t('account.sign_up'), new_user_registration_path
+          %li.nav-item
             =link_to t('account.log_in'), new_user_session_path
-        - if current_user
-          %li.nav-item.p-1
+        - else
+          %li.nav-item
             =link_to t('account.log_out'), destroy_user_session_path, method: :delete
-        .hidden.fixed.top-0.right-0.sm:block
-          - if I18n.locale == I18n.default_locale
-            %li.nav-item.p-1.ml-4=link_to t('lang.latvian'), { :locale=>'lv' }
-          - else
-            %li.nav-item.p-1.ml-4=link_to t('lang.english'), { :locale=>'en' }
+        - if I18n.locale == I18n.default_locale
+          %li.nav-item
+            =link_to t('lang.latvian'), { :locale=>'lv' }
+        - else
+          %li.nav-item
+            =link_to t('lang.english'), { :locale=>'en' }
         -if user_signed_in?
-          %li.nav-item.p-1= t('hello')
-          %li.nav-item.p-1= link_to "#{current_user.email}", current_user
+          %li.nav-item= t('hello')
+          %li.nav-item= link_to "#{current_user.email}", current_user

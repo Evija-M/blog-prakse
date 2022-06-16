@@ -20,7 +20,7 @@ end
 
 RSpec.describe 'Creating new article' do
   context 'GET /new_article' do
-    let!(:article) { create :article, :other }
+    let!(:article) { create :article }
     it 'returns new article page after submitting it' do
       visit user_session_path
       fill_in 'E-mail', with: article.user.email

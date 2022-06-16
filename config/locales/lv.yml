@@ -31,9 +31,13 @@ lv:
     show_articles: "Mani raksti"
     my_articles: "Mani raksti"
     export_articles: "Eksportēt rakstus"
+    restore_article: "Atjaunot rakstu"
+    deleted_articles: "Dzēstie raksti"
   comments:
     delete_comment: "Dzēst komentāru"
     add_comment: "Pievienot komentāru"
+    restore_comment: "Atjaunot komentāru"
+    deleted_comments: "Dzēstie komentāri"
   users:
     all_users: "Visi lietotāji"
     users_list: "Lietotāju saraksts"
@@ -56,8 +60,14 @@ lv:
     submit: "Pievienot"
     go_back: "Atpakaļ"
     update: "Atjaunot"
+    restore: "Atjaunot"
   confirmation:
     confirm?: "Vai esat pārliecināts?"
   email:
     created_new_article: "Jūs tikko izveidojāt jaunu rakstu"
     link: "Saite"
+  characters: "simboli minimums"
+  pundit:
+    default: 'Jūs nevarat veikt šo darbību'
+    comment_policy:
+     restore?: 'Jūs nevarat atjaunot šo komentāru'

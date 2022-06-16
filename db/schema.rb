@@ -11,19 +11,20 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-# rubocop:disable Metrics/BlockLength
 
-ActiveRecord::Schema[7.0].define(version: 20_220_531_190_501) do
+ActiveRecord::Schema[7.0].define(version: 20_220_603_112_358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'articles', force: :cascade do |t|
     t.string 'title'
     t.text 'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+    t.timestamptz 'created_at', null: false
+    t.timestamptz 'updated_at', null: false
     t.string 'status'
     t.bigint 'user_id', null: false
+    t.timestamptz 'deleted_at'
+    t.index ['deleted_at'], name: 'index_articles_on_deleted_at'
     t.index ['user_id'], name: 'index_articles_on_user_id'
   end
 
@@ -34,7 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 20_220_531_190_501) do
     t.datetime 'updated_at', null: false
     t.bigint 'user_id', null: false
     t.bigint 'article_id', null: false
+    t.datetime 'deleted_at'
     t.index ['article_id'], name: 'index_comments_on_article_id'
+    t.index ['deleted_at'], name: 'index_comments_on_deleted_at'
     t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
@@ -55,7 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 20_220_531_190_501) do
     t.string 'unconfirmed_email'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.integer 'role', default: 0
+    t.string 'role', default: 'registred'
+    t.datetime 'deleted_at'
+    t.index ['deleted_at'], name: 'index_users_on_deleted_at'
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
@@ -64,4 +69,3 @@ ActiveRecord::Schema[7.0].define(version: 20_220_531_190_501) do
   add_foreign_key 'comments', 'articles'
   add_foreign_key 'comments', 'users'
 end
-# rubocop:enable Metrics/BlockLength

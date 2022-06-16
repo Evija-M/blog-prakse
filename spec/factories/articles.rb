@@ -7,11 +7,10 @@ FactoryBot.define do
     user { create :user }
     title { Faker::Food.dish }
     body { Faker::Food.description }
+    sequence :status, %i[public private].cycle
+
     trait :archived do
       status { Article::ARCHIVED }
-    end
-    trait :other do
-      sequence :status, %i[public private].cycle
     end
   end
 end

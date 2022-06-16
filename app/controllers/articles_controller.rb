@@ -2,15 +2,17 @@
 
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = policy_scope(Article)
   end
 
   def show
-    @article  = Article.find(params[:id])
+    @article = Article.with_deleted.find(params[:id])
+    authorize @article
   end
 
   def new
     @article = Article.new
+    authorize @article
   end
 
   def create
@@ -24,8 +26,8 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
-    redirect_to @article if current_user.id != @article.user_id
+    @article = Article.with_deleted.find(params[:id])
+    authorize @article, :edit?
   end
 
   def update
@@ -38,8 +40,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    if @article.user_id == current_user.id
+    @article = Article.with_deleted.find(params[:id])
+    if authorize @article, :destroy?
       @article.destroy
       redirect_to root_path, status: :see_other
     else
@@ -51,16 +53,29 @@ class ArticlesController < ApplicationController
     @articles = Article.where(status: 'archived')
   end
 
-  def show_user_rticles
-    @articles = Article.where(user_id: current_user.id)
+  def show_user_articles
+    authorize current_user, :show_user_articles?, policy_class: ArticlePolicy
+    @articles = current_user.articles
+  end
+
+  def show_user_deleted_articles
+    authorize current_user, :show_user_articles?, policy_class: ArticlePolicy
+    @deleted_articles = current_user.articles.only_deleted
+  end
+
+  def restore_article
+    @article = Article.only_deleted.find(params[:article_id])
+    authorize @article, :restore?
+    @article.recover(recursive: true)
+    redirect_to @article
   end
 
   def export
-    @articles = Article.all
+    @articles = policy_scope(Article)
     respond_to do |format|
       format.xlsx
     end
-    render xlsx: 'export_articles', disposition: inline
+    render xlsx: 'export_articles', disposition: :inline
   end
 
   private

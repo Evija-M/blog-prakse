@@ -1,22 +1,13 @@
 .container
   %h1
     = t('articles.all_articles')
-  %p 
-    = Article.public_count 
-    = t('articles.public_articles')
-  %p
-    = Article.private_count 
-    = t('articles.private_articles')
-  %p
-    = Article.archived_count 
-    = t('articles.archived_articles')
-  %ul
-    - @articles.each do |article|
-      - if article.public?
-        %li= link_to article.title, article
+    - if current_user
+      .btn.btn-primary= link_to t('articles.new_article'), new_article_path
 
-%div.container
-- if current_user
-  = link_to t('articles.new_article'), new_article_path
-= link_to t('articles.archived_articles'), showarchived_articles_path
-= link_to t('export_articles'), export_articles_path(format: "xlsx")
+  .container-sm
+    .row.row-cols-3
+      - @articles.each do |article|
+        .col.p-4.border
+          %a= link_to article.title, article
+          %p= article.user.email
+          

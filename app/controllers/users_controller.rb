@@ -2,15 +2,19 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    authorize current_user, policy_class: UserPolicy
+    @users = policy_scope(User)
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    authorize @user, policy_class: UserPolicy
   end
 
-  def admin?
-    @user.role == 'admin'
+  def restore_user
+    @user = User.only_deleted.find(params[:user_id])
+    authorize current_user, :restore?, policy_class: UserPolicy
+    @user.recover(recursive: true)
+    redirect_to users_path
   end
-  helper_method :admin?
 end

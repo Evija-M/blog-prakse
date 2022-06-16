@@ -23,5 +23,6 @@ module Blog
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{yml}')]
     config.i18n.available_locales = %i[en lv]
     config.i18n.default_locale = :en
+    config.active_job.queue_adapter = :resque
   end
 end

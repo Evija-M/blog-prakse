@@ -1,7 +1,9 @@
-%p.m-2.p-2 
-  %b.m-2.p-1= Comment.human_attribute_name('commenter')
-  =comment.commenter
-  %br
-  %b.m-2.p-1= Comment.model_name.human
-  =comment.body
-  %button.btn.btn-outline-primary=link_to t('comments.delete_comment'), [comment.article, comment], data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
+.container
+  .col-sm-5.col-md-6.col-12.pb-4
+    .comment.mt-4.text-justify.float-left
+      .h4= comment.commenter
+      %span= comment.created_at
+      %br/
+      %p= comment.body
+      - if policy(comment).destroy?
+        .btn.btn-danger.btn-sm=link_to t('comments.delete_comment'), [comment.article, comment], data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}

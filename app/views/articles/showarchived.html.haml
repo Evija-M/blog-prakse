@@ -1,5 +1,8 @@
-%h1= t('articles.archived_articles')
-%ul
--@articles.each do |article|
-    %li= article.title
+.display-3= t('articles.archived_articles')
+.container-sm
+  .row.row-cols-3
+    - @articles.each do |article|
+      .col.p-4.border
+        %a= link_to article.title, article
+        %p= article.user.email
     

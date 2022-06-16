@@ -1,7 +1,6 @@
 %h1= t('articles.my_articles')
 %ul.list-group.w-25
-  -@articles.each do |article|
+  - @articles.each do |article|
     %li.list-group-item.m-1
       = link_to article.title, article
       = article.status
-    
