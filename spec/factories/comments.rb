@@ -5,7 +5,7 @@ require 'faker'
 FactoryBot.define do
   factory :comment do
     association :user
-    article { create :article }
+    association :article
     commenter { Faker::Name.first_name }
     body { Faker::Lorem.sentence[2..10] }
   end
