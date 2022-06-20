@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @comment = @article.comments.create(comment_params)
     authorize @comment
-    redirect_to article_path(@article)
+    respond_to do |format|
+      format.html { redirect_to article_path(@article) }
+    end
   end
 
   def destroy

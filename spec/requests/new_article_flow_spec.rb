@@ -21,18 +21,17 @@ end
 RSpec.describe 'Creating new article' do
   context 'GET /new_article' do
     let!(:article) { create :article }
-    it 'returns new article page after submitting it' do
+    it 'updates index.html with the new article' do
       visit user_session_path
       fill_in 'E-mail', with: article.user.email
       fill_in 'Password', with: article.user.password
       click_button 'Log in'
-      visit new_article_path
+      click_on('New article')
       fill_in 'Title', with: article.title
       fill_in 'Text', with: article.body
       page.select 'public', from: 'Status'
       click_on 'Submit'
       expect(page).to have_content(article.title)
-      expect(page).to have_content(article.body)
     end
   end
 end

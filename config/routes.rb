@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   scope '(:locale)' do
     resources :articles do
       resources :comments
-      get 'showarchived', to: 'articles#showarchived', on: :collection
+      get 'archived', to: 'articles#archived', on: :collection
       get 'export', to: 'articles#export', on: :collection
       get 'restore', to: 'articles#restore_article'
     end

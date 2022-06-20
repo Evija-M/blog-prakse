@@ -1,0 +1,11 @@
+.modal-content
+  .modal-body
+    %button#close.btn.btn-secondary x
+    =render 'form', article: @article
+:javascript
+  $(function () {
+      $('#close').on('click', function () {
+          $('#modal').html('');
+      })
+  })
+  

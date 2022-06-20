@@ -1,13 +1,10 @@
 .container
-  %h1
-    = t('articles.all_articles')
-    - if current_user
-      .btn.btn-primary= link_to t('articles.new_article'), new_article_path
-
-  .container-sm
-    .row.row-cols-3
-      - @articles.each do |article|
-        .col.p-4.border
-          %a= link_to article.title, article
-          %p= article.user.email
-          
+  %h1= t('articles.all_articles')
+  - if current_user
+    .btn.btn-primary= link_to t('articles.new_article'), new_article_path, data: {  turbo_frame: "modal" }, name: "New article"
+.container-sm
+  .row.row-cols-3#articles
+    - @articles.each do |article|
+      .col.p-4.border
+        %a= link_to article.title, article
+        %p= article.user.email

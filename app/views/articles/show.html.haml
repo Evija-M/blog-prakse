@@ -1,10 +1,11 @@
-.container
+.container#article
   .display-3.p-1= @article.title
   %hr.w-75
   .w-75
   = @article.body
+.container
   - if policy(@article).edit?
-    .btn.btn-primary.m-1= link_to t('actions.edit'), edit_article_path(@article)
+    .btn.btn-primary= link_to t('actions.edit'), edit_article_path(@article), data: { "turbo-frame": "modal"}
     .btn.btn-danger.m-1= link_to t('actions.delete'), article_path(@article), data: {turbo_method: :delete, turbo_confirm: t('confirmation.confirm?')}
   %hr.w-75
 .container
@@ -14,3 +15,6 @@
   -if current_user
     .h4.m-2.p-1= t('comments.add_comment')
     =render 'comments/form'
+%turbo-stream{:action => "append", :target => "messages"}
+  %template
+    #message_1 My new message!

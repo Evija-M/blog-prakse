@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     if @article.save
       UserMailer.new_article_email(current_user, @article).deliver
-      redirect_to @article
+      render turbo_stream: turbo_stream.append('articles', partial: 'articles/article', locals: { article: @article })
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update(article_params)
-      redirect_to @article
+      render turbo_stream: turbo_stream.replace('article', partial: 'articles/show', locals: { article: @article })
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def showarchived
+  def archived
     @articles = Article.where(status: 'archived')
   end
 
